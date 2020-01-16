@@ -1,64 +1,31 @@
 package com.servicenow.exercise_java;
 
-import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
 
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.servicenow.resources.Game;
-import com.servicenow.resources.NESGames;
 import com.servicenow.exercise.R;
 
-public class MainActivity extends ListActivity {
-
-    public static final Game[] nesGames = NESGames.INSTANCE.getList();
+public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new GameAdapter());
+        setContentView(R.layout.activity_main);
+        Button button = findViewById(R.id.launchGameList);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGameListActivity();
+            }
+        });
     }
 
-    class GameAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return nesGames.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return nesGames[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
-            if (row == null) {
-                row = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_list_item, parent, false);
-            }
-
-            ImageView gameCover = row.findViewById(R.id.image);
-            TextView gameName = row.findViewById(R.id.text1);
-            TextView gameDescription = row.findViewById(R.id.text2);
-
-            Game game = nesGames[position];
-            gameName.setText(game.getName());
-            gameDescription.setText(game.getShortDescription());
-            gameCover.setImageResource(Game.Companion.getIconResource(game.getCover()));
-
-            return row;
-        }
+    private void startGameListActivity() {
+        Intent myIntent = new Intent(MainActivity.this, GameListActivity.class);
+        MainActivity.this.startActivity(myIntent);
     }
 }
