@@ -1,64 +1,50 @@
 package com.servicenow.exercise_java;
 
-import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.servicenow.exercise.R;
 import com.servicenow.resources.Game;
 import com.servicenow.resources.NESGames;
-import com.servicenow.exercise.R;
 
-public class GameListActivity extends ListActivity {
-
+public class GameListActivity extends AppCompatActivity {
+    private String TAG = GameListActivity.class.getSimpleName();
     public static final Game[] nesGames = NESGames.INSTANCE.getList();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new GameAdapter());
-    }
 
-    class GameAdapter extends BaseAdapter {
+        setContentView(R.layout.game_list);
+        GameAdapter adapter           = new GameAdapter(this, R.layout.game_list_item, nesGames);
+        RecyclerView gameListingsView = findViewById(R.id.game_list_recyclerView);
 
-        @Override
-        public int getCount() {
-            return nesGames.length;
-        }
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        gameListingsView.setLayoutManager(layoutManager);
+        gameListingsView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
 
-        @Override
-        public Object getItem(int position) {
-            return nesGames[position];
-        }
+        gameListingsView.setAdapter(adapter);
 
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
-            if (row == null) {
-                row = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_list_item, parent, false);
+        gameListingsView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), gameListingsView, new RecyclerViewTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Log.d(TAG, "onClick: Game " + nesGames[position].getName() + " Clicked. Position - " + position);
+                Intent intent = new Intent(GameListActivity.this, GameDetailActivity.class);
+                intent.putExtra("Position", position);
+                GameListActivity.this.startActivity(intent);
             }
 
-            ImageView gameCover = row.findViewById(R.id.image);
-            TextView gameName = row.findViewById(R.id.text1);
-            TextView gameDescription = row.findViewById(R.id.text2);
-
-            Game game = nesGames[position];
-            gameName.setText(game.getName());
-            gameDescription.setText(game.getShortDescription());
-            gameCover.setImageResource(Game.Companion.getIconResource(game.getCover()));
-
-            return row;
-        }
+            @Override
+            public void onLongClick(View view, int position) {
+            }
+        }));
     }
+
 }

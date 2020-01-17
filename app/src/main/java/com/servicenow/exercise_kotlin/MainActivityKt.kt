@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.servicenow.exercise.R
 import com.servicenow.resources.Game
 import com.servicenow.resources.NESGames
-import com.servicenow.exercise.R
 
 class MainActivityKt : ListActivity() {
 
@@ -39,9 +39,9 @@ class MainActivityKt : ListActivity() {
                 false
             )
 
-            val gameCover: ImageView = row.findViewById(R.id.image) as ImageView
-            val gameName = row.findViewById(R.id.text1) as TextView
-            val gameDescription = row.findViewById(R.id.text2) as TextView
+            val gameCover: ImageView = row.findViewById(R.id.game_cover) as ImageView
+            val gameName = row.findViewById(R.id.game_name) as TextView
+            val gameDescription = row.findViewById(R.id.game_description) as TextView
 
             val game: Game = NESGames.list[position]
             gameName.text = game.name
