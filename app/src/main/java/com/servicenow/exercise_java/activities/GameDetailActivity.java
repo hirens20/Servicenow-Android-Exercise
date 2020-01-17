@@ -1,4 +1,4 @@
-package com.servicenow.exercise_java;
+package com.servicenow.exercise_java.activities;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +24,6 @@ public class GameDetailActivity extends AppCompatActivity {
         Game game = games[position];
 
         Log.d(TAG, "Got intent with position and game - " + game.getLongDescription());
-
 
         ImageView gameCover = findViewById(R.id.gameCoverImage);
         gameCover.setImageResource(Game.Companion.getIconResource(game.getCover()));

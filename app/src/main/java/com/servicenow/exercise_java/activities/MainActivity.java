@@ -1,4 +1,4 @@
-package com.servicenow.exercise_java;
+package com.servicenow.exercise_java.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "Create Main Activity");
+        Log.d(TAG, "Creating Main Activity");
         setContentView(R.layout.activity_main);
-
+        
         Button button = findViewById(R.id.launchGameListButton);
         button.setOnClickListener(v -> {
             Log.d(TAG, "Launch list of games button clicked");

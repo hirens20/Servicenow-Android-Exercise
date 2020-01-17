@@ -1,4 +1,4 @@
-package com.servicenow.exercise_java;
+package com.servicenow.exercise_java.recyclerView;
 
 import android.content.Context;
 import android.view.LayoutInflater;

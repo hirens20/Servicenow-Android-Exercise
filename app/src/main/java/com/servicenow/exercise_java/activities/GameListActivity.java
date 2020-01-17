@@ -1,4 +1,4 @@
-package com.servicenow.exercise_java;
+package com.servicenow.exercise_java.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.servicenow.exercise.R;
+import com.servicenow.exercise_java.recyclerView.GameAdapter;
+import com.servicenow.exercise_java.recyclerView.RecyclerViewTouchListener;
 import com.servicenow.resources.Game;
 import com.servicenow.resources.NESGames;
 

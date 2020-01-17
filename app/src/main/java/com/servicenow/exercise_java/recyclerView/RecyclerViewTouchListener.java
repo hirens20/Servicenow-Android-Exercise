@@ -1,4 +1,4 @@
-package com.servicenow.exercise_java;
+package com.servicenow.exercise_java.recyclerView;
 
 import android.content.Context;
 import android.view.GestureDetector;
@@ -31,7 +31,6 @@ public class RecyclerViewTouchListener implements RecyclerView.OnItemTouchListen
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
         View child = rv.findChildViewUnder(e.getX(), e.getY());
         if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
             clickListener.onClick(child, rv.getChildLayoutPosition(child));

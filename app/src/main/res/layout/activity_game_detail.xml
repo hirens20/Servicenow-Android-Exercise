@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.servicenow.exercise_java.GameDetailActivity">
+    tools:context="com.servicenow.exercise_java.activities.GameDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar"
