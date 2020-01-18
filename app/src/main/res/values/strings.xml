@@ -4,4 +4,7 @@
     <string name="title_activity_game_detail">GameDetailActivity</string>
     <string name="game_detail">Game: %1$s</string>
     <string name="games">All Games</string>
+    <string name="success_response_toast">Getting Games list from server</string>
+    <string name="no_internet_toast">Showing locally stored game data since you are not connected to internet.</string>
+    <string name="incorrect_response_toast">Showing locally stored game data since there were issues getting data from server. </string>
 </resources>

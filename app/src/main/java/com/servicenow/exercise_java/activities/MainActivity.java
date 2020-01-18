@@ -1,10 +1,14 @@
 package com.servicenow.exercise_java.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void getGameDetails() {
         AsyncTask<String, String, JSONObject> task = new ApiRequestTask().execute(Constants.GAME_DETAILS_URL);
+        boolean gamesFetched = true;
         try {
             Log.d(TAG, "getGameDetails: Task returned result");
             JSONArray temp = (JSONArray) task.get().get("games");
@@ -79,15 +84,33 @@ public class MainActivity extends AppCompatActivity {
                         temp.getJSONObject(i).get("longDescription").toString()));
             }
             Log.d(TAG, "getGameDetails: Response received with " + nesGames.size() + " Games");
+            gamesFetched = true;
         } catch (ExecutionException e) {
+            gamesFetched = false;
             Log.e(TAG, "getGameDetails: ExecutionException " + e.toString());
         } catch (InterruptedException e) {
+            gamesFetched = false;
             Log.e(TAG, "getGameDetails :InterruptedException " + e.toString());
         } catch (JSONException e) {
+            gamesFetched = false;
             Log.e(TAG, "getGameDetails: JSONException " + e.toString());
         } catch (Exception e) {
+            gamesFetched = false;
             Log.e(TAG, "getGameDetails: Exception " + e.toString());
         }
+        if (gamesFetched) {
+            Toast.makeText(getApplicationContext(), R.string.success_response_toast, Toast.LENGTH_SHORT).show();
+        }   else if (!isNetworkAvailable()){
+            Toast.makeText(getApplicationContext(), R.string.no_internet_toast, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.incorrect_response_toast, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     // Currently not being used. Explained above.

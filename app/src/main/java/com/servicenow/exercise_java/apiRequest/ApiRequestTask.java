@@ -49,7 +49,7 @@ public class ApiRequestTask extends AsyncTask<String, String, JSONObject> {
      * @throws IOException
      * @throws JSONException
      */
-    private JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
+    public JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
         URL url = new URL(urlString);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
