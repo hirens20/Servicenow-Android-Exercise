@@ -1,6 +1,5 @@
 package com.servicenow.exercise_java.recyclerView;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +11,28 @@ import com.servicenow.resources.Game;
 public class GameAdapter extends RecyclerView.Adapter<GameViewHolder> {
 
     private final Game[] games;
-    private Context context;
     private int itemResource;
 
-    public GameAdapter(Context context, int itemResource, Game[] games) {
+    /**
+     * Adapter constructor. Context can be passed but not getting used here so removed.
+     * @param itemResource
+     * @param games
+     */
+    public GameAdapter(int itemResource, Game[] games) {
         this.games        = games;
-        this.context      = context;
         this.itemResource = itemResource;
     }
 
+    /**
+     * Layout inflator
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public GameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(itemResource, parent, false);
-        return new GameViewHolder(this.context, view);
+        return new GameViewHolder(view);
     }
 
     @Override

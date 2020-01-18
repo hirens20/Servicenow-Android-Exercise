@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Servicenow Exercise</string>
-    <string name="launch_game_list">Launch List of Games</string>
+    <string name="app_name">Game List</string>
+    <string name="launch_game_list">Games this way</string>
     <string name="title_activity_game_detail">GameDetailActivity</string>
+    <string name="game_detail">Game: %1$s</string>
+    <string name="games">All Games</string>
 </resources>

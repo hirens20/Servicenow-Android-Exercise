@@ -1,13 +1,18 @@
 package com.servicenow.resources
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
 import com.servicenow.exercise.R
+import kotlinx.android.parcel.Parcelize
 
-class Game(
+@Parcelize
+@SuppressLint("ParcelCreator")
+class Game (
     var name: String,
     var cover: String,
     var shortDescription: String,
     var longDescription: String
-) {
+) : Parcelable {
 
     override fun toString(): String {
         return name
